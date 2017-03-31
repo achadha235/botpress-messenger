@@ -204,4 +204,19 @@ module.exports = (bp, messenger) => {
     })
   })
 
+
+  messenger.on('game_play', e=> {
+    preprocessEvent(e)
+    .then(profile=> {
+      bp.middlewares.sendIncoming({
+        platform: 'facebook',
+        type: 'game_play',
+        text: 'gameplay',
+        user: profile,
+        game_play: e.game_play,
+        raw: e
+      })
+    })
+  })
+
 }

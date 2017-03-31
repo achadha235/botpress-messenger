@@ -452,6 +452,10 @@ class Messenger extends EventEmitter {
     }
   }
 
+  _handleGamePlayEvent(event) {
+    this._handleEvent('game_play', event)
+  }
+
   _handleFacebookResponse(res) {
     if (!res) return
 
@@ -523,6 +527,8 @@ class Messenger extends EventEmitter {
             this._handleEvent('referral', event)
           } else if (event.payment){
             this._handleEvent('payment', event)
+          } else if (event.game_play){
+            this._handleGamePlayEvent(event)
           }
           else {
             console.log('Webhook received unknown event: ', event)
